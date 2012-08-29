@@ -1,4 +1,12 @@
 class ProjectsController < ApplicationController
+   
+  before_filter :authorize_admin!, :except => [:index, :show]
+  
+  before_filter :find_project, :only => [:show,
+                                          :edit,
+                                          :update,
+                                          :destroy]  
+  
   def index
     @projects = Project.all 
   end
@@ -49,13 +57,7 @@ class ProjectsController < ApplicationController
     flash[:alert] = "The project you were looking" +
                     " for could not be found."
     redirect_to projects_path
-    end  
-    
-  before_filter :find_project, :only => [:show,
-                                          :edit,
-                                          :update,
-                                          :destroy]
-
+    end        
 end
 
 
