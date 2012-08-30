@@ -4,7 +4,12 @@ Ticketee::Application.routes.draw do
   root :to => "projects#index"
   resources :projects do
     resources :tickets
+    
+  namespace :admin do
+    resources :users
   end
+
+end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
